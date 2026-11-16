@@ -2786,7 +2786,9 @@
 
                     <button class="btn-tool" style="margin-top: 20px; background: #0284C7; color: #FFF; width: 100%; padding: 12px;" onclick="evaluateReadingAnswers()">Evaluate Reading 📝</button>
                     <div id="reading-evaluation-results" style="margin-top: 15px;"></div>
-                    <button class="btn-tool" style="margin-top: 25px; background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px;" onclick="advanceStep()">Next Activity ➔</button>
+                    <button class="btn-tool locked-btn" id="next-activity-btn" style="margin-top: 25px; width: 100%; padding: 14px; background: #94A3B8; cursor: not-allowed;" onclick="advanceStep()" disabled>
+                       🔒 Next Activity (Complete activity first)
+                    </button>
                 </div>
             `;
         } else if (activeAct === 'listening') {
@@ -2950,6 +2952,7 @@
         document.getElementById('reading-evaluation-results').innerHTML = `
             <div style="font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Score: ${score} / 4 correct</div>
             ${feedbackHTML}
+        unlockNextActivity();
         `;
     }
 
@@ -2978,6 +2981,7 @@
         document.getElementById('listening-evaluation-results').innerHTML = `
             <div style="font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Score: ${score} / 4 correct</div>
             ${feedbackHTML}
+        unlockNextActivity();
         `;
     }
 
@@ -3009,6 +3013,7 @@
         } else {
             fbDiv.className = "feedback-box feedback-incorrect";
             fbDiv.innerHTML = `✖ You got ${correctCount} out of ${arc.items.length} correct. Adjust the highlighted items and try again!`;
+            unlockNextActivity();
         }
     }
 
@@ -3040,6 +3045,7 @@
         } else {
             fbDiv.className = "feedback-box feedback-incorrect";
             fbDiv.innerHTML = `✖ You matched ${correctCount} of ${items.length} correctly. Review the highlighted items to unlock your badge!`;
+            unlockNextActivity();
         }
     }
 
@@ -3231,6 +3237,18 @@
             </div>
         `;
     }
+
+    function unlockNextActivity() {
+    const nextBtn = document.getElementById('next-activity-btn');
+    if (nextBtn) {
+        nextBtn.classList.remove('locked-btn');
+        nextBtn.style.background = 'var(--secondary-purple)';
+        nextBtn.style.color = '#FFF';
+        nextBtn.style.cursor = 'pointer';
+        nextBtn.removeAttribute('disabled');
+        nextBtn.innerHTML = '🔓 Next Activity ➔';
+    }
+}
 
     function completeUnit() {
     if (currentUnit === 8) {
