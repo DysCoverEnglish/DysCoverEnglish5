@@ -2823,7 +2823,7 @@
                         </div>
                     `).join('')}
 
-                    <button class="btn-tool" style="margin-top: 20px; background: #0284C7; color: #FFF; width: 100%; padding: 12px;" onclick="evaluateListeningAnswers()">Evaluate Listening 📝</button>
+                    <button class="btn-tool locked-btn" id="next-activity-btn" style="margin-top: 20px; background: #0284C7; color: #FFF; width: 100%; padding: 12px;" onclick="evaluateListeningAnswers()">Evaluate Listening 📝</button>
                     <div id="listening-evaluation-results" style="margin-top: 15px;"></div>
                     <button class="btn-tool" style="margin-top: 25px; background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px;" onclick="advanceStep()">Next Activity ➔</button>
                 </div>
@@ -2843,7 +2843,7 @@
                         <input type="file" accept="audio/*" class="btn-tool" onchange="handleAudioUpload(event)">
                     </div>
                     <div id="speaking-ai-feedback"></div>
-                    <button class="btn-tool" style="margin-top: 25px; background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px;" onclick="advanceStep()">Next Activity ➔</button>
+                    <button class="btn-tool locked-btn" id="next-activity-btn" style="margin-top: 25px; background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px;" onclick="advanceStep()">Next Activity ➔</button>
                 </div>
             `;
         } else if (activeAct === 'writing') {
@@ -2855,7 +2855,7 @@
                     <textarea id="writing-input" class="board-input" placeholder="Compose your response in English here..."></textarea>
                     <button class="btn-tool" style="background: #F59E0B; color: #FFF; padding: 12px 20px;" onclick="analyzeCustomWriting()">✨ Instant Writing Feedback</button>
                     <div id="writing-ai-feedback"></div>
-                    <button class="btn-tool" style="margin-top: 25px; background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px;" onclick="advanceStep()">Next Activity ➔</button>
+                    <button class="btn-tool locked-btn" id="next-activity-btn" style="margin-top: 25px; background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px;" onclick="advanceStep()">Next Activity ➔</button>
                 </div>
             `;
         } else if (activeAct === 'arcade') {
@@ -2877,7 +2877,7 @@
                     
                     <div style="background: var(--bg-canvas); padding: 20px; border-radius: 12px; margin: 15px 0; border: 2px solid var(--border-color);">
                         ${itemsHtml}
-                        <button class="btn-tool" style="background: #0284C7; color: #FFF; width: 100%; padding: 12px; margin-top: 10px;" onclick="evaluateDynamicArcade()">Verify Answers 🔎</button>
+                        <button class="btn-tool locked-btn" id="next-activity-btn" style="background: #0284C7; color: #FFF; width: 100%; padding: 12px; margin-top: 10px;" onclick="evaluateDynamicArcade()">Verify Answers 🔎</button>
                         <div id="arcade-dynamic-feedback" style="margin-top: 12px;"></div>
                     </div>
 
