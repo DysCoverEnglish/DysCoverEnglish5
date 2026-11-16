@@ -3233,12 +3233,10 @@
 
     function completeUnit() {
     if (currentUnit === 8) {
-        // Fijamos el progreso al máximo (40 de 40 sesiones) para que llegue al 100% exacto y pinte todas las estrellas
         unlockedUnit = 8;
         unlockedSession = 6; 
         saveProgressToStorage();
 
-        // Obtenemos los datos del estudiante actual
         const currentUserEmail = localStorage.getItem("dyscover_logged_user") || userProfile.email || "student@unitec.edu.mx";
         const userNickname = userProfile.nickname || currentUserEmail.split('@')[0];
 
@@ -3269,7 +3267,6 @@
             `;
         }
     } else {
-        // Comportamiento normal para las unidades 1 a 7
         alert(`Congratulations! Unit ${currentUnit} Capstone Complete. Unit ${currentUnit + 1} unlocked! ⭐`);
         if (currentUnit < 8) {
             unlockedUnit++;
