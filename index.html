@@ -3378,8 +3378,11 @@ function downloadCertificateAsImage() {
     const nameSpan = document.getElementById('cert-student-name');
     const emailSpan = document.getElementById('cert-student-email');
     
-    if (nameSpan) nameSpan.innerText = (typeof userProfile !== 'undefined' && userProfile.nickname) ? userProfile.nickname : "Estudiante";
-    if (emailSpan) emailSpan.innerText = (typeof userProfile !== 'undefined' && userProfile.email) ? userProfile.email : "estudiante@dyscoverenglish.com";
+    const studentName = nameSpan && nameSpan.innerText ? nameSpan.innerText : "Estudiante";
+    const studentEmail = emailSpan && emailSpan.innerText ? emailSpan.innerText : "estudiante@dyscoverenglish.com";
+
+    if (nameSpan) nameSpan.innerText = studentName;
+    if (emailSpan) emailSpan.innerText = studentEmail;
 
     html2canvas(certElement, {
         scale: 2,
@@ -3387,7 +3390,7 @@ function downloadCertificateAsImage() {
         backgroundColor: "#ffffff"
     }).then(canvas => {
         const link = document.createElement('a');
-        link.download = 'Certificado_DysCoverEnglish.png'; // Nombre exacto solicitado
+        link.download = 'Certificado_DysCoverEnglish.png'; // Nombre exacto requerido
         link.href = canvas.toDataURL('image/png');
         link.click();
     }).catch(error => {
