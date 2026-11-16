@@ -2745,8 +2745,7 @@
                     <button class="btn-tool" style="background: #0284C7; color: #FFF; width: 100%; padding: 12px; margin-top: 10px;" onclick="evaluateCapstoneQuiz()">Verify Synthesis Quiz 🔎</button>
                     <div id="capstone-quiz-feedback" style="margin-top: 12px;"></div>
 
-                    <button class="btn-tool" id="btn-finish-unit" style="background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px; margin-top: 20px; opacity: 0.5; cursor: not-allowed;" disabled onclick="completeUnit()">Submit Capstone & Unlock Unit ${currentUnit + 1} 🔓 ⭐</button>
-                </div>
+                    <button class="btn-tool" id="btn-finish-unit" style="background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px; margin-top: 20px; opacity: 0.5; cursor: not-allowed;" disabled onclick="completeUnit()">${currentUnit === 8 ? 'Complete Course & Claim Purple Star 💜🎓' : `Submit Capstone & Unlock Unit ${currentUnit + 1} 🔓 ⭐`}</button>
             `;
             return;
         }
@@ -3234,7 +3233,15 @@
 
     function completeUnit() {
     if (currentUnit === 8) {
-        // 🌟 Lógica especial para cuando terminan la última unidad (Unidad 8) en inglés
+        // Fijamos el progreso al máximo (40 de 40 sesiones) para que llegue al 100% exacto y pinte todas las estrellas
+        unlockedUnit = 8;
+        unlockedSession = 6; 
+        saveProgressToStorage();
+
+        // Obtenemos los datos del estudiante actual
+        const currentUserEmail = localStorage.getItem("dyscover_logged_user") || userProfile.email || "student@unitec.edu.mx";
+        const userNickname = userProfile.nickname || currentUserEmail.split('@')[0];
+
         alert("🎉 Congratulations! You have successfully completed the entire DysCoverEnglish course and earned your Purple Star 💜🎓");
         
         const rewardData = sessionContents[8][5].completionReward;
@@ -3242,11 +3249,22 @@
             let contentDiv = document.getElementById('content-display');
             contentDiv.innerHTML = `
                 <div class="card" style="background: var(--pastel-lavender); text-align: center; padding: 40px; border: 3px solid var(--secondary-purple);">
-                    <h2 style="color: var(--primary-dark); font-size: 2rem; margin-bottom: 15px;">${rewardData.badgeName}</h2>
-                    <h3 style="color: var(--secondary-purple); margin-bottom: 20px;">${rewardData.certificateTitle}</h3>
+                    <h2 style="color: var(--primary-dark); font-size: 2.2rem; margin-bottom: 10px;">${rewardData.badgeName}</h2>
+                    <h3 style="color: var(--secondary-purple); margin-bottom: 15px;">${rewardData.certificateTitle}</h3>
+                    
+                    <!-- 🎓 Datos personalizados del estudiante -->
+                    <div style="background: #ffffff; padding: 15px; border-radius: 8px; display: inline-block; margin-bottom: 20px; border: 1px dashed var(--secondary-purple);">
+                        <p style="margin: 0; font-size: 1.1rem; color: #333;"><strong>Certified Student:</strong> ${userNickname}</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.95rem; color: #666;"><strong>Email:</strong> ${currentUserEmail}</p>
+                    </div>
+
                     <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 25px;">${rewardData.congratulatoryMessage}</p>
-                    <div style="font-size: 4rem; margin-bottom: 20px;">💜🏆⭐</div>
-                    <button class="btn-tool" style="background: var(--secondary-purple); color: #FFF; padding: 14px 25px; font-size: 1.1rem;" onclick="location.reload()">Restart / View Completed Course 🔄</button>
+                    <div style="font-size: 3.5rem; margin-bottom: 20px;">💜🏆⭐</div>
+                    
+                    <div style="display: flex; gap: 15px; justify-content: center;">
+                        <button class="btn-tool" style="background: var(--secondary-purple); color: #FFF; padding: 12px 20px; font-size: 1rem;" onclick="window.print()">Print / Save Certificate 🖨️</button>
+                        <button class="btn-tool" style="background: var(--primary-dark); color: #FFF; padding: 12px 20px; font-size: 1rem;" onclick="location.reload()">Restart Course 🔄</button>
+                    </div>
                 </div>
             `;
         }
