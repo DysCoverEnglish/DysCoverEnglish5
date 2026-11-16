@@ -2952,8 +2952,8 @@
         document.getElementById('reading-evaluation-results').innerHTML = `
             <div style="font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Score: ${score} / 4 correct</div>
             ${feedbackHTML}
-        unlockNextActivity();
         `;
+        unlockNextActivity();
     }
 
     function evaluateListeningAnswers() {
@@ -2981,8 +2981,8 @@
         document.getElementById('listening-evaluation-results').innerHTML = `
             <div style="font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Score: ${score} / 4 correct</div>
             ${feedbackHTML}
-        unlockNextActivity();
         `;
+        unlockNextActivity();
     }
 
     function evaluateDynamicArcade() {
@@ -3010,10 +3010,11 @@
             finishBtn.style.opacity = '1';
             finishBtn.style.cursor = 'pointer';
             finishBtn.removeAttribute('disabled');
+
+            unlockNextActivity();
         } else {
             fbDiv.className = "feedback-box feedback-incorrect";
             fbDiv.innerHTML = `✖ You got ${correctCount} out of ${arc.items.length} correct. Adjust the highlighted items and try again!`;
-            unlockNextActivity();
         }
     }
 
@@ -3042,10 +3043,11 @@
             finishBtn.style.opacity = '1';
             finishBtn.style.cursor = 'pointer';
             finishBtn.removeAttribute('disabled');
+
+            unlockNextActivity();
         } else {
             fbDiv.className = "feedback-box feedback-incorrect";
             fbDiv.innerHTML = `✖ You matched ${correctCount} of ${items.length} correctly. Review the highlighted items to unlock your badge!`;
-            unlockNextActivity();
         }
     }
 
