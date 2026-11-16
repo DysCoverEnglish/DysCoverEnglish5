@@ -2672,7 +2672,7 @@
         renderContent();
     }
 
-    function makeWordsClickable(text) {
+    function makeWordsClickableWithIpa(text) {
         return text.split(' ').map(w => {
             let clean = w.replace(/[^a-zA-Z]/g, '');
             if (!clean) return w;
@@ -2750,7 +2750,7 @@
             return;
         }
 
-        let readingHtml = sessionData.paragraphs.map(p => `<p class="reading-paragraph">${makeWordsClickable(p)}</p>`).join('');
+        let readingHtml = sessionData.paragraphs.map(p => `<p class="reading-paragraph">${makeWordsClickableWithIpa(p)}</p>`).join('');
         let activeAct = activityOrder[skillStep - 1] || 'reading';
         let activityHtml = '';
 
