@@ -2674,12 +2674,12 @@
     }
 
     function makeWordsClickableWithIpa(text) {
-        return text.split(' ').map(w => {
-            let clean = w.replace(/[^a-zA-Z]/g, '');
-            if (!clean) return w;
-            return `<span class="clickable-word" onclick="analyzeWord('${clean}')">${w}</span>`;
-        }).join(' ');
-    }
+    return text.split(' ').map(w => {
+        let clean = w.replace(/[^a-zA-Z]/g, '');
+        if (!clean) return w;
+        return `<span class="clickable-word" onclick="analyzeWord('${clean}')">${w}</span>`;
+    }).join(' ');
+}
 
     function renderContent() {
         const display = document.getElementById('content-display');
@@ -3338,11 +3338,9 @@ function makeWordsClickableWithIpa(text) {
     return text.split(' ').map(w => {
         const clean = w.replace(/[^a-zA-Z]/g, '');
         if (!clean) return w;
-        const ipa = getWordIpa(clean);
-        return `<span class="clickable-word" onclick="analyzeWord('${clean}')" style="display:inline-flex; flex-direction:column; align-items:center; margin: 0 3px 6px 3px; vertical-align:top;">
-                    <span>${w}</span>
-                    <span style="color:var(--secondary-purple); font-size:0.72rem; font-weight:normal;">${ipa}</span>
-                </span>`;
+        
+        // Solo dejamos la palabra envuelta para que sea clickeable
+        return `<span class="clickable-word" onclick="analyzeWord('${clean}')">${w}</span>`;
     }).join(' ');
 }
 
