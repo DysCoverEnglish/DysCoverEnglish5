@@ -81,6 +81,7 @@
         .grammar-box { background: var(--surface); border-left: 4px solid #059669; padding: 14px; border-radius: 8px; margin: 12px 0; }
         .interactive-row { background: var(--surface); border: 1.5px solid var(--border-color); padding: 14px; border-radius: 10px; margin-bottom: 12px; }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -3246,7 +3247,7 @@
         if (rewardData) {
             let contentDiv = document.getElementById('content-display');
             contentDiv.innerHTML = `
-                <div class="card" style="background: var(--pastel-lavender); text-align: center; padding: 40px; border: 3px solid var(--secondary-purple);">
+                <div id="certificate-container" class="card" style="background: var(--pastel-lavender); text-align: center; padding: 40px; border: 3px solid var(--secondary-purple);">
                     <h2 style="color: var(--primary-dark); font-size: 2.2rem; margin-bottom: 10px;">${rewardData.badgeName}</h2>
                     <h3 style="color: var(--secondary-purple); margin-bottom: 15px;">${rewardData.certificateTitle}</h3>
                     
@@ -3260,7 +3261,7 @@
                     <div style="font-size: 3.5rem; margin-bottom: 20px;">💜🏆⭐</div>
                     
                     <div style="display: flex; gap: 15px; justify-content: center;">
-                        <button class="btn-tool" style="background: var(--secondary-purple); color: #FFF; padding: 12px 20px; font-size: 1rem;" onclick="window.print()">Print / Save Certificate 🖨️</button>
+                        <button class="btn-tool" style="background: var(--secondary-purple); color: #FFF; padding: 12px 20px; font-size: 1rem;" onclick="downloadCertificateAsImage()">📥 Descargar Certificado 💜</button>
                         <button class="btn-tool" style="background: var(--primary-dark); color: #FFF; padding: 12px 20px; font-size: 1rem;" onclick="location.reload()">Restart Course 🔄</button>
                     </div>
                 </div>
@@ -3368,6 +3369,27 @@ function analyzeWord(word) {
 }
 
     function closeWordModal() { document.getElementById('word-modal').classList.add('hidden'); }
+
+function downloadCertificateAsImage() {
+    const certElement = document.getElementById('certificate-container'); 
+
+    if (!certElement) {
+        alert("No se encontró el contenedor del certificado.");
+        return;
+    }
+
+    html2canvas(certElement, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff"
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'Certificado_VisuaLingo.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+}
+
 </script>
 
 </body>
