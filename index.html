@@ -2379,8 +2379,7 @@
                     { text: "1. Which structure correctly introduces a future time clause without 'will'?", correct: "present_simple" },
                     { text: "2. Which reporting pattern follows 'apologized' when taking accountability?", correct: "prep_gerund" },
                     { text: "3. Which introductory clause demonstrates formal academic register?", correct: "participle_clause" },
-                    { text: "4. Which question format uses statement word order for polite inquiry?", correct: "indirect_question" },
-                    { text: "5. What symbol and reward do you unlock upon completing this final course milestone?", correct: "purple_star" }
+                    { text: "4. Which question format uses statement word order for polite inquiry?", correct: "indirect_question" }
                 ],
                 capstoneQuizOptions: [
                     { val: "present_simple", label: "Present Simple (e.g., Once communities adopt...)" },
@@ -3233,19 +3232,26 @@
         `;
     }
 
-    function completeSessionStep() {
-        alert(`Great job! Session ${currentSession} completed. Star Achievement Unlocked! ⭐`);
-        if (currentSession < 5) {
-            unlockedSession = Math.max(unlockedSession, currentSession + 1);
-            currentSession++;
-            skillStep = 1;
-        }
-        saveProgressToStorage();
-        renderTabs();
-        renderContent();
-    }
-
     function completeUnit() {
+    if (currentUnit === 8) {
+        // 🌟 Lógica especial para cuando terminan la última unidad (Unidad 8) en inglés
+        alert("🎉 Congratulations! You have successfully completed the entire DysCoverEnglish course and earned your Purple Star 💜🎓");
+        
+        const rewardData = sessionContents[8][5].completionReward;
+        if (rewardData) {
+            let contentDiv = document.getElementById('content-display');
+            contentDiv.innerHTML = `
+                <div class="card" style="background: var(--pastel-lavender); text-align: center; padding: 40px; border: 3px solid var(--secondary-purple);">
+                    <h2 style="color: var(--primary-dark); font-size: 2rem; margin-bottom: 15px;">${rewardData.badgeName}</h2>
+                    <h3 style="color: var(--secondary-purple); margin-bottom: 20px;">${rewardData.certificateTitle}</h3>
+                    <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 25px;">${rewardData.congratulatoryMessage}</p>
+                    <div style="font-size: 4rem; margin-bottom: 20px;">💜🏆⭐</div>
+                    <button class="btn-tool" style="background: var(--secondary-purple); color: #FFF; padding: 14px 25px; font-size: 1.1rem;" onclick="location.reload()">Restart / View Completed Course 🔄</button>
+                </div>
+            `;
+        }
+    } else {
+        // Comportamiento normal para las unidades 1 a 7
         alert(`Congratulations! Unit ${currentUnit} Capstone Complete. Unit ${currentUnit + 1} unlocked! ⭐`);
         if (currentUnit < 8) {
             unlockedUnit++;
@@ -3258,6 +3264,7 @@
         renderTabs();
         renderContent();
     }
+}
 
     const wordDictionary = {
         "pedestrian": { ipa: "/pəˈdɛstrɪən/" },
