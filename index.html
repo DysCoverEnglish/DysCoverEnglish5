@@ -3282,73 +3282,90 @@
 }
 
     const wordDictionary = {
-        "pedestrian": { ipa: "/pəˈdɛstrɪən/" },
-        "landmark": { ipa: "/ˈlændmɑːk/" },
-        "detour": { ipa: "/ˈdiːtʊə/" },
-        "intersection": { ipa: "/ˌɪntəˈsɛkʃən/" },
-        "tactile": { ipa: "/ˈtæktaɪl/" },
-        "ramp": { ipa: "/ræmp/" },
-        "signage": { ipa: "/ˈsaɪnɪdʒ/" },
-        "congestion": { ipa: "/kənˈdʒɛstʃən/" },
-        "bottleneck": { ipa: "/ˈbɒtlnɛk/" },
-        "commute": { ipa: "/kəˈmjuːt/" },
-        "infrastructure": { ipa: "/ˈɪnfrəstrʌktʃə/" },
-        "wayfinding": { ipa: "/ˈweɪfaɪndɪŋ/" },
-        "prototype": { ipa: "/ˈprəʊtətaɪp/" },
-        "boarding": { ipa: "/ˈbɔːdɪŋ/" },
-        "pass": { ipa: "/pɑːs/" },
-        "luggage": { ipa: "/ˈlʌɡɪdʒ/" },
-        "security": { ipa: "/sɪˈkjʊərɪti/" },
-        "checkpoint": { ipa: "/ˈtʃɛkpɔɪnt/" },
-        "allowance": { ipa: "/əˈlaʊəns/" },
-        "terminal": { ipa: "/ˈtɜːmɪnl/" },
-        "kiosk": { ipa: "/ˈkiːɒsk/" },
-        "baggage": { ipa: "/ˈbæɡɪdʒ/" },
-        "screening": { ipa: "/ˈskriːnɪŋ/" },
-        "prohibited": { ipa: "/prəˈhɪbɪtɪd/" },
-        "queue": { ipa: "/kjuː/" },
-        "escalator": { ipa: "/ˈɛskəleɪtə/" },
-        "layover": { ipa: "/ˈleɪəʊvə/" },
-        "customs": { ipa: "/ˈkʌstəmz/" },
-        "itinerary": { ipa: "/aɪˈtɪnərəri/" },
-        "concourse": { ipa: "/ˈkɒŋkɔːs/" },
-        "etiquette": { ipa: "/ˈɛtɪkɛt/" },
-        "custom": { ipa: "/ˈkʌstəm/" },
-        "norm": { ipa: "/nɔːm/" },
-        "taboo": { ipa: "/təˈbuː/" },
-        "cooperative": { ipa: "/kəʊˈɒpərətɪv/" },
-        "authentic": { ipa: "/ɔːˈθɛntɪk/" },
-        "gastronomic": { ipa: "/ˌɡæstrəˈnɒmɪk/" },
-        "culinary": { ipa: "/ˈkʌlɪnəri/" },
-        "sustainable": { ipa: "/səˈsteɪnəbl/" },
-        "footprint": { ipa: "/ˈfʊtprɪnt/" },
-        "nomad": { ipa: "/ˈnəʊmæd/" },
-        "coworking": { ipa: "/ˈkəʊwɜːkɪŋ/" },
-        "cybersecurity": { ipa: "/ˌsaɪbərsɪˈkjʊrɪti/" },
-        "asynchronous": { ipa: "/eɪˈsɪŋkrənəs/" }
+    "pedestrian": { ipa: "/pəˈdɛstriən/" },
+    "landmark": { ipa: "/ˈlændmɑːk/" },
+    "detour": { ipa: "/ˈdiːtʊə/" },
+    "intersection": { ipa: "/ˌɪntəˈsɛkʃən/" },
+    "tactile": { ipa: "/ˈtæktaɪl/" },
+    "ramp": { ipa: "/ræmp/" },
+    "signage": { ipa: "/ˈsaɪnɪdʒ/" },
+    "congestion": { ipa: "/kənˈdʒɛstʃən/" },
+    "bottleneck": { ipa: "/ˈbɒtlnɛk/" },
+    "commute": { ipa: "/kəˈmjuːt/" },
+    "infrastructure": { ipa: "/ˈɪnfrəˌstrʌktʃə/" },
+    "wayfinding": { ipa: "/ˈweɪfaɪndɪŋ/" },
+    "prototype": { ipa: "/ˈprəʊtətaɪp/" },
+    "boarding": { ipa: "/ˈbɔːdɪŋ/" },
+    "pass": { ipa: "/pɑːs/" },
+    "luggage": { ipa: "/ˈlʌɡɪdʒ/" },
+    "security": { ipa: "/sɪˈkjʊərɪti/" },
+    "checkpoint": { ipa: "/ˈtʃɛkpɔɪnt/" },
+    "allowance": { ipa: "/əˈlaʊəns/" },
+    "terminal": { ipa: "/ˈtɜːmɪnl/" },
+    "kiosk": { ipa: "/ˈkiːɒsk/" },
+    "baggage": { ipa: "/ˈbæɡɪdʒ/" },
+    "screening": { ipa: "/ˈskriːnɪŋ/" },
+    "prohibited": { ipa: "/prəˈhɪbɪtɪd/" },
+    "queue": { ipa: "/kjuː/" },
+    "escalator": { ipa: "/ˈɛskəleɪtə/" },
+    "layover": { ipa: "/ˈleɪəʊvə/" },
+    "customs": { ipa: "/ˈkʌstəmz/" },
+    "itinerary": { ipa: "/aɪˈtɪnərəri/" },
+    "concourse": { ipa: "/ˈkɒŋkɔːs/" },
+    "etiquette": { ipa: "/ˈɛtɪkɛt/" },
+    "custom": { ipa: "/ˈkʌstəm/" },
+    "norm": { ipa: "/nɔːm/" },
+    "taboo": { ipa: "/təˈbuː/" },
+    "cooperative": { ipa: "/kəʊˈɒpərətɪv/" },
+    "authentic": { ipa: "/ɔːˈθɛntɪk/" },
+    "gastronomic": { ipa: "/ˌɡæstrəˈnɒmɪk/" },
+    "culinary": { ipa: "/ˈkʌlɪnəri/" },
+    "sustainable": { ipa: "/səˈsteɪnəbl/" },
+    "footprint": { ipa: "/ˈfʊtprɪnt/" },
+    "nomad": { ipa: "/ˈnəʊmæd/" },
+    "coworking": { ipa: "/ˈkəʊwɜːkɪŋ/" },
+    "cybersecurity": { ipa: "/ˌsaɪbərsɪˈkjʊərɪti/" },
+    "asynchronous": { ipa: "/eɪˈsɪŋkrənəs/" }
+};
+
+function getWordIpa(word) {
+    const cleanWord = word.toLowerCase();
+    return wordDictionary[cleanWord] ? wordDictionary[cleanWord].ipa : `/${cleanWord}/`;
+}
+
+function makeWordsClickableWithIpa(text) {
+    return text.split(' ').map(w => {
+        const clean = w.replace(/[^a-zA-Z]/g, '');
+        if (!clean) return w;
+        const ipa = getWordIpa(clean);
+        return `<span class="clickable-word" onclick="analyzeWord('${clean}')" style="display:inline-flex; flex-direction:column; align-items:center; margin: 0 3px 6px 3px; vertical-align:top;">
+                    <span>${w}</span>
+                    <span style="color:var(--secondary-purple); font-size:0.72rem; font-weight:normal;">${ipa}</span>
+                </span>`;
+    }).join(' ');
+}
+
+function analyzeWord(word) {
+    if (!word) return;
+    const cleanWord = word.toLowerCase();
+    const entry = wordDictionary[cleanWord] || { ipa: `/${cleanWord}/` };
+
+    document.getElementById('word-title').innerText = `Pronunciation: "${word}"`;
+    document.getElementById('word-body').innerHTML = `
+        <strong>IPA Transcription (UK Standard):</strong> <span style="color: var(--secondary-purple); font-size: 1.25rem; font-weight: bold;">${entry.ipa}</span>
+    `;
+    document.getElementById('btn-speak-word').onclick = () => {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(word);
+            u.rate = parseFloat(document.getElementById('modal-speed-select').value);
+            let voiceChoice = document.getElementById('modal-voice-select').value;
+            applyVoiceConfig(u, voiceChoice);
+            window.speechSynthesis.speak(u);
+        }
     };
-
-    function analyzeWord(word) {
-        if (!word) return;
-        const cleanWord = word.toLowerCase();
-        const entry = wordDictionary[cleanWord] || { ipa: `/${cleanWord}/` };
-
-        document.getElementById('word-title').innerText = `Pronunciation: "${word}"`;
-        document.getElementById('word-body').innerHTML = `
-            <strong>IPA Transcription (UK Standard):</strong> <span style="color: var(--secondary-purple); font-size: 1.25rem; font-weight: bold;">${entry.ipa}</span>
-        `;
-        document.getElementById('btn-speak-word').onclick = () => {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(word);
-                u.rate = parseFloat(document.getElementById('modal-speed-select').value);
-                let voiceChoice = document.getElementById('modal-voice-select').value;
-                applyVoiceConfig(u, voiceChoice);
-                window.speechSynthesis.speak(u);
-            }
-        };
-        document.getElementById('word-modal').classList.remove('hidden');
-    }
+    document.getElementById('word-modal').classList.remove('hidden');
+}
 
     function closeWordModal() { document.getElementById('word-modal').classList.add('hidden'); }
 </script>
