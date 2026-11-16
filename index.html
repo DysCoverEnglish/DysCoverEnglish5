@@ -3253,8 +3253,8 @@
                     
                     <!-- 🎓 Datos personalizados del estudiante -->
                     <div style="background: #ffffff; padding: 15px; border-radius: 8px; display: inline-block; margin-bottom: 20px; border: 1px dashed var(--secondary-purple);">
-                        <p style="margin: 0; font-size: 1.1rem; color: #333;"><strong>Certified Student:</strong> ${userNickname}</p>
-                        <p style="margin: 5px 0 0 0; font-size: 0.95rem; color: #666;"><strong>Email:</strong> ${currentUserEmail}</p>
+                        <p style="margin: 0; font-size: 1.1rem; color: #333;"><strong>Certified Student:</strong> <span id="cert-student-name">${userNickname}</span></p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.95rem; color: #666;"><strong>Email:</strong> <span id="cert-student-email">${currentUserEmail}</span></p>
                     </div>
 
                     <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 25px;">${rewardData.congratulatoryMessage}</p>
@@ -3339,7 +3339,6 @@ function makeWordsClickableWithIpa(text) {
         const clean = w.replace(/[^a-zA-Z]/g, '');
         if (!clean) return w;
         
-        // Solo dejamos la palabra envuelta para que sea clickeable
         return `<span class="clickable-word" onclick="analyzeWord('${clean}')">${w}</span>`;
     }).join(' ');
 }
@@ -3369,12 +3368,18 @@ function analyzeWord(word) {
     function closeWordModal() { document.getElementById('word-modal').classList.add('hidden'); }
 
 function downloadCertificateAsImage() {
-    const certElement = document.getElementById('certificate-container'); 
-
+    const certElement = document.getElementById('certificate-container');
+    
     if (!certElement) {
         alert("No se encontró el contenedor del certificado.");
         return;
     }
+
+    const nameSpan = document.getElementById('cert-student-name');
+    const emailSpan = document.getElementById('cert-student-email');
+    
+    if (nameSpan) nameSpan.innerText = sessionData.userName || "Estudiante";
+    if (emailSpan) emailSpan.innerText = sessionData.userEmail || "estudiante@dyscoverenglish.com";
 
     html2canvas(certElement, {
         scale: 2,
@@ -3382,7 +3387,7 @@ function downloadCertificateAsImage() {
         backgroundColor: "#ffffff"
     }).then(canvas => {
         const link = document.createElement('a');
-        link.download = 'Certificado_VisuaLingo.png';
+        link.download = 'Certificado_DysCoverEnglish.png'; // <--- Y aquí cambias el nombre
         link.href = canvas.toDataURL('image/png');
         link.click();
     });
