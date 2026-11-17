@@ -2482,70 +2482,69 @@
     }
 
     function handleAuth() {
-        const email = document.getElementById('auth-email').value.trim().toLowerCase();
-        const password = document.getElementById('auth-password').value.trim();
-        const nameInput = document.getElementById('auth-name').value.trim();
-        const isAnon = document.getElementById('user-anonymous').checked;
+    const email = document.getElementById('auth-email').value.trim().toLowerCase();
+    const password = document.getElementById('auth-password').value.trim();
+    const nameInput = document.getElementById('auth-name').value.trim();
+    const isAnon = document.getElementById('user-anonymous').checked;
 
-        if (!email || !email.includes('@') || !password) {
-            alert('Please enter a valid email address and password.');
+    if (!email || !email.includes('@') || !password) {
+        alert('Please enter a valid email address and password.');
+        return;
+    }
+
+    const userKey = 'dyscover_user_' + email;
+    const existingUserJSON = localStorage.getItem(userKey);
+
+    if (isRegisterMode) {
+        if (existingUserJSON) {
+            alert('An account with this email already exists. Please log in.');
+            return;
+        }
+        if (!nameInput) {
+            alert('Please enter your name or nickname for registration.');
             return;
         }
 
-        const userKey = 'dyscover_user_' + email;
-        const existingUserJSON = localStorage.getItem(userKey);
+        const newUser = {
+            email: email,
+            nickname: nameInput,
+            password: password,
+            anonymous: isAnon,
+            unlockedUnit: 1,
+            unlockedSession: 1,
+            surveyCompleted: false
+        };
+        localStorage.setItem(userKey, JSON.stringify(newUser));
+        userProfile = newUser;
+        
+        document.getElementById('auth-card').classList.add('hidden');
+        document.getElementById('survey-card').classList.remove('hidden');
+    } else {
+        if (!existingUserJSON) {
+            alert('No account found with this email. Please register first.');
+            return;
+        }
 
-        if (isRegisterMode) {
-            if (existingUserJSON) {
-                alert('An account with this email already exists. Please log in.');
-                return;
-            }
-            if (!nameInput) {
-                alert('Please enter your name or nickname for registration.');
-                return;
-            }
+        const userData = JSON.parse(existingUserJSON);
+        if (userData.password !== password) {
+            alert('Incorrect password. Please try again.');
+            return;
+        }
 
-            const newUser = {
-                email: email,
-                nickname: nameInput,
-                password: password,
-                anonymous: isAnon,
-                unlockedUnit: 1,
-                unlockedSession: 1,
-                surveyCompleted: false
-            };
-            localStorage.setItem(userKey, JSON.stringify(newUser));
-            userProfile = newUser;
-            
+        userProfile = userData;
+        unlockedUnit = userData.unlockedUnit || 1;
+        unlockedSession = userData.unlockedSession || 1;
+        currentUnit = unlockedUnit;
+        currentSession = unlockedSession;
+
+        if (!userProfile.surveyCompleted) {
             document.getElementById('auth-card').classList.add('hidden');
             document.getElementById('survey-card').classList.remove('hidden');
         } else {
-            if (!existingUserJSON) {
-                alert('No account found with this email. Please register first.');
-                return;
-            }
-
-            const userData = JSON.parse(existingUserJSON);
-            if (userData.password !== password) {
-                alert('Incorrect password. Please try again.');
-                return;
-            }
-
-            userProfile = userData;
-            unlockedUnit = userData.unlockedUnit || 1;
-            unlockedSession = userData.unlockedSession || 1;
-            currentUnit = unlockedUnit;
-            currentSession = unlockedSession;
-
-            if (!userProfile.surveyCompleted) {
-                document.getElementById('auth-card').classList.add('hidden');
-                document.getElementById('survey-card').classList.remove('hidden');
-            } else {
-                loadUserSession(userData);
-            }
+            loadUserSession(userData);
         }
     }
-
+}
     function completeSurvey() {
         userProfile.surveyCompleted = true;
         localStorage.setItem('dyscover_user_' + userProfile.email, JSON.stringify(userProfile));
