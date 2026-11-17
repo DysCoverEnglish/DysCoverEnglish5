@@ -2506,8 +2506,8 @@
     const existingUserJSON = localStorage.getItem(userKey);
 
     const authCard = document.getElementById('auth-card');
-    const isRegisterMode = authCard && authCard.dataset.mode === 'register';
 
+    // Usamos la variable global 'isRegisterMode' en lugar de buscar un dataset que no existe
     if (isRegisterMode) {
         if (existingUserJSON) {
             alert('An account with this email already exists. Please log in.');
