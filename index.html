@@ -3296,19 +3296,31 @@
 }
 
     function completeUnit() {
-    if (currentUnit < unitsData.length) {
-        unlockedUnit = currentUnit + 1;
-        unlockedSession = 1; // Reinicia a la sesión 1 de la nueva unidad
-        currentUnit = unlockedUnit;
-        currentSession = 1;
-        saveProgressToStorage();
-        renderTabs();
-        renderContent();
-        alert(`¡Felicitaciones! Has desbloqueado la Unidad ${currentUnit}.`);
-    } else {
-        alert("¡Has completado todas las unidades del curso!");
+        if (currentUnit < unitsData.length) {
+            unlockedUnit = currentUnit + 1;
+            unlockedSession = 1;
+            currentUnit = unlockedUnit;
+            currentSession = 1;
+            saveProgressToStorage();
+            renderTabs();
+            renderContent();
+            alert(`¡Excelente! Has desbloqueado la Unidad ${currentUnit}.`);
+        } else {
+            alert("¡Felicidades! Has completado todas las unidades del curso.");
+        }
     }
-}
+
+    function switchSession(s) { 
+        if (currentUnit === unlockedUnit && s > unlockedSession) {
+            alert('Please complete the preceding sessions in order.');
+            return;
+        }
+        currentSession = s; 
+        skillStep = 1; 
+        audioListenCount = 0; 
+        renderTabs(); 
+        renderContent(); 
+    }
 
     function completeUnit() {
     if (currentUnit === 8) {
