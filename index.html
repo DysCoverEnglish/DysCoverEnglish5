@@ -148,7 +148,7 @@
             <input type="password" id="auth-password" placeholder="••••••••" style="width: 100%; padding: 12px; border-radius: 8px; border: 1.5px solid var(--border-color); font-size: 1rem; font-family: inherit;">
         </div>
 
-        <button id="auth-submit-btn" class="btn-tool" style="background: var(--secondary-purple); color: #FFF; width: 100%; padding: 14px; font-size: 1rem;" onclick="handleAuth()">Sign In ➔</button>
+        <button id="auth-submit-btn" class="btn-tool" style="...">Sign In →</button>
         
         <div style="text-align: center;">
             <span id="auth-toggle-text" class="auth-toggle" onclick="toggleAuthMode()">Don't have an account? Register here</span>
@@ -603,7 +603,7 @@
             2: {
                 title: "Session 2: Background Actions & Interruptions",
                 focus: "Past Continuous (was/were + verb-ing) for Background Actions in Travel Narratives",
-                intro: "<strong>What is this session about?</strong> When recounting travel experiences, single past actions often happen while larger processes are already in progress. In this session, we learn how to use the <em>Past Continuous</em> to describe background airport activities and unexpected moments.",
+                intro: "<strong>What is this session about?</strong> When recounting travel experiences, single past actions often happen while larger processes are already in progress. In this session, we learn how to use the <em>Past Continuous</em> to describe background airport activities and  moments.",
                 grammarGuide: `
                     <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
                         <li><strong>Past Continuous Structure (Subject + was/were + verb-ing):</strong> Used for actions in progress at a specific moment in the past.<br>
@@ -3479,6 +3479,8 @@ function downloadCertificateAsImage() {
         console.error("Error al generar la imagen:", error);
     });
 }
+
+    window.handleAuth = handleAuth;
 
 </script>
 
