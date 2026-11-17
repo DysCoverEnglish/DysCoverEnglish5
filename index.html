@@ -3286,6 +3286,27 @@
     }
 }
 
+    function completeSessionStep() {
+    if (currentSession < 5) {
+        currentSession++;
+        if (currentSession > unlockedSession) {
+            unlockedSession = currentSession;
+        }
+    } else {
+        if (currentUnit < unitsData.length) {
+            currentUnit++;
+            unlockedUnit = Math.max(unlockedUnit, currentUnit);
+            unlockedSession = 1;
+            currentSession = 1;
+        }
+    }
+    saveProgressToStorage();
+    renderTabs();
+    renderContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.completeSessionStep = completeSessionStep;
+
     function completeUnit() {
         if (currentUnit < unitsData.length) {
             unlockedUnit = currentUnit + 1;
