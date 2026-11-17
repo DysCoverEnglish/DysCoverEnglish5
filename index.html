@@ -2482,10 +2482,20 @@
     }
 
     function handleAuth() {
-    const email = document.getElementById('auth-email').value.trim().toLowerCase();
-    const password = document.getElementById('auth-password').value.trim();
-    const nameInput = document.getElementById('auth-name').value.trim();
-    const isAnon = document.getElementById('user-anonymous').checked;
+    const emailElem = document.getElementById('auth-email');
+    const passwordElem = document.getElementById('auth-password');
+    const nameElem = document.getElementById('auth-name');
+    const anonElem = document.getElementById('user-anonymous');
+
+    if (!emailElem || !passwordElem) {
+        alert('Authentication form elements not found.');
+        return;
+    }
+
+    const email = emailElem.value.trim().toLowerCase();
+    const password = passwordElem.value.trim();
+    const nameInput = nameElem ? nameElem.value.trim() : '';
+    const isAnon = anonElem ? anonElem.checked : false;
 
     if (!email || !email.includes('@') || !password) {
         alert('Please enter a valid email address and password.');
@@ -2494,6 +2504,9 @@
 
     const userKey = 'dyscover_user_' + email;
     const existingUserJSON = localStorage.getItem(userKey);
+
+    const authCard = document.getElementById('auth-card');
+    const isRegisterMode = authCard && authCard.dataset.mode === 'register';
 
     if (isRegisterMode) {
         if (existingUserJSON) {
@@ -2515,10 +2528,12 @@
             surveyCompleted: false
         };
         localStorage.setItem(userKey, JSON.stringify(newUser));
-        userProfile = newUser;
         
-        document.getElementById('auth-card').classList.add('hidden');
-        document.getElementById('survey-card').classList.remove('hidden');
+        if (typeof userProfile !== 'undefined') userProfile = newUser;
+        
+        if (authCard) authCard.classList.add('hidden');
+        const surveyCard = document.getElementById('survey-card');
+        if (surveyCard) surveyCard.classList.remove('hidden');
     } else {
         if (!existingUserJSON) {
             alert('No account found with this email. Please register first.');
@@ -2531,16 +2546,16 @@
             return;
         }
 
-        userProfile = userData;
-        unlockedUnit = userData.unlockedUnit || 1;
-        unlockedSession = userData.unlockedSession || 1;
-        currentUnit = unlockedUnit;
-        currentSession = unlockedSession;
+        if (typeof userProfile !== 'undefined') userProfile = userData;
+        if (typeof unlockedUnit !== 'undefined') unlockedUnit = userData.unlockedUnit || 1;
+        if (typeof unlockedSession !== 'undefined') unlockedSession = userData.unlockedSession || 1;
 
-        if (!userProfile.surveyCompleted) {
-            document.getElementById('auth-card').classList.add('hidden');
-            document.getElementById('survey-card').classList.remove('hidden');
-        } else {
+        if (authCard) authCard.classList.add('hidden');
+        
+        const surveyCard = document.getElementById('survey-card');
+        if (!userData.surveyCompleted && surveyCard) {
+            surveyCard.classList.remove('hidden');
+        } else if (typeof loadUserSession === 'function') {
             loadUserSession(userData);
         }
     }
