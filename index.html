@@ -148,7 +148,7 @@
             <input type="password" id="auth-password" placeholder="••••••••" style="width: 100%; padding: 12px; border-radius: 8px; border: 1.5px solid var(--border-color); font-size: 1rem; font-family: inherit;">
         </div>
 
-        <button id="auth-submit-btn" class="btn-tool" style="...">Sign In →</button>
+       <button id="auth-submit-btn" class="btn-tool" style="..." onclick="handleAuth()">Sign In →</button>
         
         <div style="text-align: center;">
             <span id="auth-toggle-text" class="auth-toggle" onclick="toggleAuthMode()">Don't have an account? Register here</span>
@@ -2462,7 +2462,7 @@
         isRegisterMode = !isRegisterMode;
         const title = document.getElementById('auth-title');
         const subtitle = document.getElementById('auth-subtitle');
-        const submitBtn = document.getElementById('auth-submit-btn');
+        const submitBtn = document.getElementById('auth-submit-btn').addEventListener('click', handleAuth);
         const toggleText = document.getElementById('auth-toggle-text');
         const nameContainer = document.getElementById('name-field-container');
 
