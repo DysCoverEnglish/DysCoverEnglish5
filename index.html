@@ -2487,6 +2487,33 @@
         const nameInput = document.getElementById('auth-name').value.trim();
         const isAnon = document.getElementById('user-anonymous').checked;
 
+        } else {
+            if (!existingUserJSON) {
+                alert('No account found with this email. Please register first.');
+                return;
+            }
+
+            const userData = JSON.parse(existingUserJSON);
+            if (userData.password !== password) {
+                alert('Incorrect password. Please try again.');
+                return;
+            }
+
+            userProfile = userData;
+            
+            unlockedUnit = userData.unlockedUnit || 1;
+            unlockedSession = userData.unlockedSession || 1;
+            currentUnit = unlockedUnit;
+            currentSession = unlockedSession;
+
+            if (!userProfile.surveyCompleted) {
+                document.getElementById('auth-card').classList.add('hidden');
+                document.getElementById('survey-card').classList.remove('hidden');
+            } else {
+                loadUserSession(userData);
+            }
+        }
+
         if (!email || !email.includes('@') || !password) {
             alert('Please enter a valid email address and password.');
             return;
@@ -2922,9 +2949,25 @@
     }
 
     function advanceStep() {
-        skillStep++;
-        if (skillStep > 5) skillStep = 5;
-        renderContent();
+    skillStep++;
+    if (skillStep > 5) {
+        skillStep = 1;
+        
+        if (currentSession < 5) {
+            currentSession++;
+            if (currentSession > unlockedSession && currentUnit === unlockedUnit) {
+                unlockedSession = currentSession;
+            }
+        } else {
+            currentSession = 5;
+        }
+        
+        saveProgressToStorage();
+        renderTabs();
+    }
+    renderContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
     }
 
     function evaluateReadingAnswers() {
@@ -3249,6 +3292,21 @@
         nextBtn.style.cursor = 'pointer';
         nextBtn.removeAttribute('disabled');
         nextBtn.innerHTML = '🔓 Next Activity ➔';
+    }
+}
+
+    function completeUnit() {
+    if (currentUnit < unitsData.length) {
+        unlockedUnit = currentUnit + 1;
+        unlockedSession = 1; // Reinicia a la sesión 1 de la nueva unidad
+        currentUnit = unlockedUnit;
+        currentSession = 1;
+        saveProgressToStorage();
+        renderTabs();
+        renderContent();
+        alert(`¡Felicitaciones! Has desbloqueado la Unidad ${currentUnit}.`);
+    } else {
+        alert("¡Has completado todas las unidades del curso!");
     }
 }
 
